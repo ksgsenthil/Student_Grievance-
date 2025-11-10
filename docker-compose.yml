@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:10000"
+    environment:
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DATABASE_URL=sqlite:///instance/complaints.db
+      - DEBUG=False
+    volumes:
+      # Mount instance directory to persist database
+      - ./instance:/app/instance
+    restart: unless-stopped
